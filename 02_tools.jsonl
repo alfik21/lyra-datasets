@@ -1,0 +1,50 @@
+{"mode": "agent", "input": "Sprawdź łączność z internetem (case 1)", "output": "Użyję narzędzia NET_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Napraw brak sieci (case 2)", "output": "Użyję narzędzia NET_FIX po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż status systemu (case 3)", "output": "Użyję narzędzia SYSTEM_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeszukaj internet: sterownik RX570 (case 4)", "output": "Użyję narzędzia INTERNET_SEARCH po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż temperatury GPU (case 5)", "output": "Użyję narzędzia AUDIO_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeczytaj plik /etc/hosts (case 6)", "output": "Użyję narzędzia FILE_READ po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Podsumuj log /var/log/syslog (case 7)", "output": "Użyję narzędzia FILE_READ_SUMMARY po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Edytuj plik konfigu, zamień 127.0.0.1 na 0.0.0.0 (case 8)", "output": "Użyję narzędzia FILE_EDIT po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź ping do 8.8.8.8 (case 9)", "output": "Użyję narzędzia NET_INFO po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Zrób diagnozę dysku (case 10)", "output": "Użyję narzędzia DISK_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź łączność z internetem (case 11)", "output": "Użyję narzędzia NET_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Napraw brak sieci (case 12)", "output": "Użyję narzędzia NET_FIX po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż status systemu (case 13)", "output": "Użyję narzędzia SYSTEM_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeszukaj internet: sterownik RX570 (case 14)", "output": "Użyję narzędzia INTERNET_SEARCH po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż temperatury GPU (case 15)", "output": "Użyję narzędzia AUDIO_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeczytaj plik /etc/hosts (case 16)", "output": "Użyję narzędzia FILE_READ po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Podsumuj log /var/log/syslog (case 17)", "output": "Użyję narzędzia FILE_READ_SUMMARY po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Edytuj plik konfigu, zamień 127.0.0.1 na 0.0.0.0 (case 18)", "output": "Użyję narzędzia FILE_EDIT po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź ping do 8.8.8.8 (case 19)", "output": "Użyję narzędzia NET_INFO po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Zrób diagnozę dysku (case 20)", "output": "Użyję narzędzia DISK_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź łączność z internetem (case 21)", "output": "Użyję narzędzia NET_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Napraw brak sieci (case 22)", "output": "Użyję narzędzia NET_FIX po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż status systemu (case 23)", "output": "Użyję narzędzia SYSTEM_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeszukaj internet: sterownik RX570 (case 24)", "output": "Użyję narzędzia INTERNET_SEARCH po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż temperatury GPU (case 25)", "output": "Użyję narzędzia AUDIO_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeczytaj plik /etc/hosts (case 26)", "output": "Użyję narzędzia FILE_READ po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Podsumuj log /var/log/syslog (case 27)", "output": "Użyję narzędzia FILE_READ_SUMMARY po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Edytuj plik konfigu, zamień 127.0.0.1 na 0.0.0.0 (case 28)", "output": "Użyję narzędzia FILE_EDIT po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź ping do 8.8.8.8 (case 29)", "output": "Użyję narzędzia NET_INFO po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Zrób diagnozę dysku (case 30)", "output": "Użyję narzędzia DISK_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź łączność z internetem (case 31)", "output": "Użyję narzędzia NET_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Napraw brak sieci (case 32)", "output": "Użyję narzędzia NET_FIX po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż status systemu (case 33)", "output": "Użyję narzędzia SYSTEM_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeszukaj internet: sterownik RX570 (case 34)", "output": "Użyję narzędzia INTERNET_SEARCH po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż temperatury GPU (case 35)", "output": "Użyję narzędzia AUDIO_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeczytaj plik /etc/hosts (case 36)", "output": "Użyję narzędzia FILE_READ po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Podsumuj log /var/log/syslog (case 37)", "output": "Użyję narzędzia FILE_READ_SUMMARY po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Edytuj plik konfigu, zamień 127.0.0.1 na 0.0.0.0 (case 38)", "output": "Użyję narzędzia FILE_EDIT po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź ping do 8.8.8.8 (case 39)", "output": "Użyję narzędzia NET_INFO po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Zrób diagnozę dysku (case 40)", "output": "Użyję narzędzia DISK_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź łączność z internetem (case 41)", "output": "Użyję narzędzia NET_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Napraw brak sieci (case 42)", "output": "Użyję narzędzia NET_FIX po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż status systemu (case 43)", "output": "Użyję narzędzia SYSTEM_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeszukaj internet: sterownik RX570 (case 44)", "output": "Użyję narzędzia INTERNET_SEARCH po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Pokaż temperatury GPU (case 45)", "output": "Użyję narzędzia AUDIO_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Przeczytaj plik /etc/hosts (case 46)", "output": "Użyję narzędzia FILE_READ po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Podsumuj log /var/log/syslog (case 47)", "output": "Użyję narzędzia FILE_READ_SUMMARY po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Edytuj plik konfigu, zamień 127.0.0.1 na 0.0.0.0 (case 48)", "output": "Użyję narzędzia FILE_EDIT po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Sprawdź ping do 8.8.8.8 (case 49)", "output": "Użyję narzędzia NET_INFO po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
+{"mode": "agent", "input": "Zrób diagnozę dysku (case 50)", "output": "Użyję narzędzia DISK_DIAG po potwierdzeniu; jeśli brak prefiksu, dopytam o zgodę."}
