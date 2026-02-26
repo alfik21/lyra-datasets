@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Trening LoRA na Google Colab (GPU T4/V100)
+Pobiera datasety z GitHub: https://github.com/alfik21/lyra-datasets
+"""
+import torch
+from pathlib import Path
+from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
+from datasets import load_dataset, concatenate_datasets
+from peft import LoraConfig, get_peft_model
+import os
+import urllib.request
+
+print("=" * 50)
+print("Trening LoRA - Lyra Identity Adapter")
+print("=" * 50)
+
+print("\n[1/7] Sprawdzanie GPU...")
+print("GPU:", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("GPU:", torch.cuda.get_device_name(0))
+    print("VRAM:", torch.cuda.get_device_properties(0).total_memory / 1e9, "GB")
+
+BASE_MODEL = "speakleash/Bielik-4.5B-v3"
+OUTPUT_DIR = "/content/lyra_adapter"
+DATASETS_DIR = Path("/content/datasets")
+DATASETS_URL = "https://raw.githubusercontent.com/alfik21/lyra-datasets/main"
+
+print("\n[2/7] Pobieranie datasetów z GitHub...")
+DATASETS_DIR.mkdir(exist_ok=True)
+
+dataset_files = [
+    "00_tozsamosc.jsonl",
+    "01_core_modes.jsonl",
+    "02_tools.jsonl", 
+    "03_memory.jsonl",
+    "04_states.jsonl",
+    "05_tests.jsonl",
+]
+
+for fname in dataset_files:
+    url = f"{DATASETS_URL}/{fname}"
+    fpath = DATASETS_DIR / fname
+    print(f"  Pobieranie {fname}...")
+    urllib.request.urlretrieve(url, fpath)
+    print(f"  ✓ {fname}")
+
+print("\n[3/7] Ładowanie datasetów...")
+datasets = []
+
+dataset_files = [
+    "00_tozsamosc.jsonl",
+    "01_core_modes.jsonl",
+    "02_tools.jsonl", 
+    "03_memory.jsonl",
+    "04_states.jsonl",
+    "05_tests.jsonl",
+]
+
+for fname in dataset_files:
+    fpath = DATASETS_DIR / fname
+    if fpath.exists():
+        ds = load_dataset("json", data_files=str(fpath), split="train")
+        datasets.append(ds)
+        print(f"  ✓ {fname}: {len(ds)} przykładów")
+    else:
+        print(f"  ✗ {fname}: BRAK (wymagane!)")
+
+if not datasets:
+    raise FileNotFoundError("Brak datasetów! Wrzuć pliki .jsonl do /content/datasets/")
+
+dataset = concatenate_datasets(datasets)
+print(f"\n  RAZEM: {len(dataset)} przykładów")
+
+print("\n[4/7] Tokenizer...")
+tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL, use_fast=True, trust_remote_code=True)
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+
+print("\n[5/7] Model (FP16)...")
+model = AutoModelForCausalLM.from_pretrained(
+    BASE_MODEL,
+    torch_dtype=torch.float16,
+    device_map="auto",
+)
+
+print("\n[6/7] Konfiguracja LoRA...")
+lora_config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM",
+)
+
+model = get_peft_model(model, lora_config)
+model.print_trainable_parameters()
+
+def tokenize(example):
+    messages = example.get("messages", [])
+    text = ""
+    for msg in messages:
+        role = msg.get("role", "")
+        content = msg.get("content", "")
+        if role == "user":
+            text += f"User: {content}\n"
+        elif role == "assistant":
+            text += f"Assistant: {content}\n"
+    return tokenizer(text, truncation=True, max_length=512)
+
+print("\nTokenizacja datasetu...")
+dataset = dataset.map(tokenize, batched=False)
+
+print("\n[7/7] Trening...")
+training_args = TrainingArguments(
+    output_dir=OUTPUT_DIR,
+    num_train_epochs=3,
+    per_device_train_batch_size=2,
+    gradient_accumulation_steps=4,
+    learning_rate=3e-4,
+    fp16=True,
+    logging_steps=10,
+    save_steps=50,
+    save_total_limit=2,
+    report_to="none",
+    warmup_steps=20,
+    optim="adamw_torch",
+)
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=dataset,
+    data_collator=DataCollatorForLanguageModeling(tokenizer, mlm=False),
+)
+
+print("\n" + "=" * 50)
+print("START TRENINGU")
+print("=" * 50)
+trainer.train()
+
+print("\nZapisywanie adaptera...")
+model.save_pretrained(OUTPUT_DIR)
+tokenizer.save_pretrained(OUTPUT_DIR)
+
+print(f"\n✓ GOTOWE! Adapter: {OUTPUT_DIR}")
+print("\nPobierz folder lyra_adapter.zip z /content/")
