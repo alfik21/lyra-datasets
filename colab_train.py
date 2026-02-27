@@ -101,13 +101,24 @@ model.print_trainable_parameters()
 def tokenize(example):
     messages = example.get("messages", [])
     text = ""
-    for msg in messages:
-        role = msg.get("role", "")
-        content = msg.get("content", "")
-        if role == "user":
-            text += f"User: {content}\n"
-        elif role == "assistant":
-            text += f"Assistant: {content}\n"
+    
+    if not messages:
+        input_text = example.get("input", "")
+        output_text = example.get("output", "")
+        if input_text or output_text:
+            text = f"User: {input_text}\nAssistant: {output_text}"
+    else:
+        for msg in messages:
+            role = msg.get("role", "")
+            content = msg.get("content", "")
+            if role == "user":
+                text += f"User: {content}\n"
+            elif role == "assistant":
+                text += f"Assistant: {content}\n"
+    
+    if not text.strip():
+        text = " "
+    
     return tokenizer(text, truncation=True, max_length=512)
 
 print("\nTokenizacja datasetu...")
@@ -117,16 +128,18 @@ print("\n[7/7] Trening...")
 training_args = TrainingArguments(
     output_dir=OUTPUT_DIR,
     num_train_epochs=3,
-    per_device_train_batch_size=2,
-    gradient_accumulation_steps=4,
+    per_device_train_batch_size=1,
+    gradient_accumulation_steps=8,
     learning_rate=3e-4,
     fp16=True,
+    gradient_checkpointing=True,
     logging_steps=10,
     save_steps=50,
     save_total_limit=2,
     report_to="none",
     warmup_steps=20,
     optim="adamw_torch",
+    max_grad_norm=1.0,
 )
 
 trainer = Trainer(
