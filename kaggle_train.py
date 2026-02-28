@@ -9,6 +9,16 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments,
 from datasets import load_dataset, concatenate_datasets
 from peft import LoraConfig, get_peft_model
 import os
+from huggingface_hub import login
+HF_TOKEN = os.environ.get("HF_TOKEN")
+if HF_TOKEN:
+    try:
+        login(token=HF_TOKEN)
+        print("HF login successful")
+    except Exception as e:
+        print("HF login failed:", e)
+else:
+    print("HF_TOKEN not set. gating may block access.")
 import urllib.request
 import warnings
 warnings.filterwarnings('ignore')
