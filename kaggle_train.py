@@ -25,7 +25,22 @@ if torch.cuda.is_available():
 
 BASE_MODEL = "speakleash/Bielik-4.5B-v3"
 OUTPUT_DIR = "/kaggle/working/lyra_adapter"
-DATASETS_DIR = Path("/kaggle/input/lyra-datasets")
+
+possible_paths = [
+    Path("/kaggle/input/lyra-datasets"),
+    Path("/kaggle/input/datasets/tomaszstraw/lyra-train"),
+    Path("/kaggle/input/datasets/tomaszstraw/lyra-train-op"),
+    Path("/kaggle/working/datasets"),
+]
+
+DATASETS_DIR = None
+for p in possible_paths:
+    if p.exists():
+        test_file = list(p.glob("*.jsonl"))[0] if list(p.glob("*.jsonl")) else None
+        if test_file:
+            DATASETS_DIR = p
+            print(f"  Znaleziono: {p}")
+            break
 
 print("\n[2/7] Szukanie datasetów...")
 
@@ -41,16 +56,18 @@ dataset_files = [
 datasets = []
 loaded_from_kaggle = False
 
-for fname in dataset_files:
-    fpath = DATASETS_DIR / fname
-    if fpath.exists():
-        ds = load_dataset("json", data_files=str(fpath), split="train")
-        datasets.append(ds)
-        print(f"  ✓ {fname}: {len(ds)} przykładów")
-        loaded_from_kaggle = True
+if DATASETS_DIR:
+    for fname in dataset_files:
+        fpath = DATASETS_DIR / fname
+        if fpath.exists():
+            ds = load_dataset("json", data_files=str(fpath), split="train")
+            datasets.append(ds)
+            print(f"  ✓ {fname}: {len(ds)} przykładów")
+            loaded_from_kaggle = True
 
 if not loaded_from_kaggle:
     print("  Pobieranie z GitHub...")
+    DATASETS_DIR = Path("/kaggle/working/datasets")
     DATASETS_DIR.mkdir(parents=True, exist_ok=True)
     DATASETS_URL = "https://raw.githubusercontent.com/alfik21/lyra-datasets/main"
     
