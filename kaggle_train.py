@@ -27,10 +27,10 @@ BASE_MODEL = "speakleash/Bielik-4.5B-v3"
 OUTPUT_DIR = "/kaggle/working/lyra_adapter"
 
 possible_paths = [
+    Path("/kaggle/working/datasets"),
     Path("/kaggle/input/datasets/tomaszstraw/lyra-train"),
     Path("/kaggle/input/datasets/tomaszstraw/lyra-train-op"),
     Path("/kaggle/input/lyra-datasets"),
-    Path("/kaggle/working/datasets"),
 ]
 
 DATASETS_DIR = None
