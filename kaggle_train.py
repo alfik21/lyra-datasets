@@ -27,17 +27,17 @@ BASE_MODEL = "speakleash/Bielik-4.5B-v3"
 OUTPUT_DIR = "/kaggle/working/lyra_adapter"
 
 possible_paths = [
-    Path("/kaggle/input/lyra-datasets"),
     Path("/kaggle/input/datasets/tomaszstraw/lyra-train"),
     Path("/kaggle/input/datasets/tomaszstraw/lyra-train-op"),
+    Path("/kaggle/input/lyra-datasets"),
     Path("/kaggle/working/datasets"),
 ]
 
 DATASETS_DIR = None
 for p in possible_paths:
     if p.exists():
-        test_file = list(p.glob("*.jsonl"))[0] if list(p.glob("*.jsonl")) else None
-        if test_file:
+        test_files = list(p.glob("*.jsonl"))
+        if test_files:
             DATASETS_DIR = p
             print(f"  Znaleziono: {p}")
             break
@@ -68,7 +68,6 @@ if DATASETS_DIR:
 if not loaded_from_kaggle:
     print("  Pobieranie z GitHub...")
     DATASETS_DIR = Path("/kaggle/working/datasets")
-    DATASETS_DIR.mkdir(parents=True, exist_ok=True)
     DATASETS_URL = "https://raw.githubusercontent.com/alfik21/lyra-datasets/main"
     
     for fname in dataset_files:
